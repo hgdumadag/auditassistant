@@ -16,10 +16,10 @@
 
 import streamlit as st
 from streamlit.logger import get_logger
-import OpenAI
+import openai
 import time
 import os
-import json
+#import json
 from dotenv import load_dotenv
 load_dotenv()
 
