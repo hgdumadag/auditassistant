@@ -45,8 +45,8 @@ if "thread_id" not in st.session_state:
     st.session_state["thread_id"] = None
 
 # Set up the Streamlit page with a title and icon
-st.set_page_config(page_title="JGSHI Investment Advisor", page_icon=":robot_face:", layout="wide")
-st.header(":robot_face: JGSHI Investment Advisor")
+st.set_page_config(page_title="JGSHI Audit Assistant", page_icon=":robot_face:", layout="wide")
+st.header(":robot_face: JGSHI Audit Assistant")
 
 # Get the OPENAI API Key
 #openai_api_key_env = os.getenv("OPENAI_API_KEY")
