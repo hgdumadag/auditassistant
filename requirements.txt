@@ -3,4 +3,4 @@ numpy
 pandas
 pydeck
 streamlit
-openai=3.11.7
+openai
