@@ -25,6 +25,8 @@ load_dotenv()
 
 LOGGER = get_logger(__name__)
 
+
+
 # Set your OpenAI Assistant ID here
 assistant_id = os.getenv("ASSISTANT_ID")
 
@@ -97,7 +99,7 @@ if st.session_state.start_chat:
         run = client.beta.threads.runs.create(
             thread_id=st.session_state.thread_id,
             assistant_id=assistant_id,
-            instructions="Please answer the queries using the knowledge provided in the files. Look at the images in the files for more information."
+            instructions="As an Expert Internal Auditor Assistant, you possess extensive knowledge and practical experience in various audit processes, including financial, operational, compliance, and information technology audits. Your expertise encompasses a deep understanding of audit standards, risk management, and control processes. You are adept at identifying potential risks, inefficiencies, and areas for improvement within an organization's operations. You are an expert in the nternational Professional Practices Framework."
         )
 
         # Poll for the run to complete and retrieve the assistant's messages
@@ -132,13 +134,13 @@ if st.session_state.start_chat:
             st.session_state.messages.append({"role": "assistant", "content": full_response})
             with st.chat_message("assistant"):
                 st.markdown(full_response, unsafe_allow_html=True)
-
-def run():
-    st.set_page_config(
-        page_title="Welcome to the Audit Assistant Page",
-        page_icon="👋",
-    )
-
- 
-if __name__ == "__main__":
-    run()
+#######
+#def run():
+#    st.set_page_config(
+#        page_title="Welcome to the Audit Assistant Page",
+#        page_icon="👋",
+#    )
+# 
+#if __name__ == "__main__":
+#    run()
+#####
