@@ -16,7 +16,7 @@
 
 import streamlit as st
 from streamlit.logger import get_logger
-import openai
+from openai import OpenAI
 import time
 import os
 #import json
@@ -33,7 +33,7 @@ os.environ["assistant_id"] == st.secrets["ASSISTANT_ID"]
 #assistant_id = os.getenv("ASSISTANT_ID")
 
 # Initialize the OpenAI client (ensure to set your API key in the sidebar within the app)
-client = openai
+client = OpenAI(api_key=st.secrets.OPENAI_API_KEY)
 
 # Initialize the session state variables for file IDs and chat control
 if "file_id_list" not in st.session_state:
@@ -59,7 +59,7 @@ openai_api_key = openai_api_key_env
 url = "https://platform.openai.com/account/api-keys"
 st.sidebar.markdown(f"Get your API key [here]({url})")
 if openai_api_key:
-    openai.api_key = openai_api_key
+    OpenAI.api_key = openai_api_key
 
 # Button to start the chat session
 if st.sidebar.button("Start Chat"):
