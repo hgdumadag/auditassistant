@@ -30,6 +30,7 @@ LOGGER = get_logger(__name__)
 # Set your OpenAI Assistant ID here
 assistant_id = ""
 os.environ["assistant_id"] = st.secrets["ASSISTANT_ID"]
+assistant_id=st.secrets.ASSISTANT_ID
 #assistant_id = os.getenv("ASSISTANT_ID")
 
 # Initialize the OpenAI client (ensure to set your API key in the sidebar within the app)
