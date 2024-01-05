@@ -28,6 +28,7 @@ LOGGER = get_logger(__name__)
 
 
 # Set your OpenAI Assistant ID here
+assistant_id = ""
 os.environ[assistant_id] = st.secrets['ASSISTANT_ID']
 #assistant_id = os.getenv("ASSISTANT_ID")
 
@@ -50,6 +51,7 @@ st.header(":robot_face: JGSHI Audit Assistant")
 
 # Get the OPENAI API Key
 #openai_api_key_env = os.getenv("OPENAI_API_KEY")
+openai_api_key_env=""
 os.environ[openai_api_key_env] = st.secrets['OPENAI_API_KEY']
 openai_api_key = st.sidebar.text_input(
     'OpenAI API Key', placeholder='sk-', value=openai_api_key_env)
