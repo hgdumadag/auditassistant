@@ -89,16 +89,17 @@ if st.session_state.start_chat:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
 
-    # Chat input for the user
-    if prompt := st.chat_input("How can I help you?"):
-        #Add user message to the state and display it
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        with st.chat_message("user"):
-            st.markdown(prompt)
-        if context_file:
-            context = context_file.read().decode()
-            context_msg = f"The user provided the following document for context. Please refer to the document in your response.\n\n----------\n\n{context}\n\n----------"
-            messages = messages + [{"role": "system","content": context_msg}]
+# Chat input for the user
+if prompt := st.chat_input("How can I help you?"):
+    # Add user message to the state and display it
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.chat_message("user"):
+        st.markdown(prompt)
+    if context_file:
+        context = context_file.read().decode()
+        context_msg = f"The user provided the following document for context. Please refer to the document in your response.\n\n----------\n\n{context}\n\n----------"
+        st.session_state.messages.append({"role": "system", "content": context_msg}) # Use st.session_state.messages instead of messages
+
         
         # Add the user's message to the existing thread
         client.beta.threads.messages.create(
