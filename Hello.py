@@ -71,7 +71,7 @@ if st.sidebar.button("Start Chat"):
     st.write("thread id: ", thread.id)
 
 # Provide ability to upload context file 
-context_file = st.sidebar.file_uploader("Context input", type=("md", "txt", "pdf" ), accept_multiple_files=False)
+context_file = st.sidebar.file_uploader("Context input", type=("md", "txt"), accept_multiple_files=False)
 
 # Define the function to process messages with citations
 def process_message_with_citations(message):
