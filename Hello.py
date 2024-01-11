@@ -95,7 +95,11 @@ if st.session_state.start_chat:
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
-    
+        if context_file:
+            context = context_file.read().decode()
+            context_msg = f"The user provided the following document for context. Please refer to the document in your response.\n\n----------\n\n{context}\n\n----------"
+            messages = messages + [{"role": "system","content": context_msg}]
+        
         # Add the user's message to the existing thread
         client.beta.threads.messages.create(
             thread_id=st.session_state.thread_id,
