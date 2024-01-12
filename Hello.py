@@ -86,7 +86,7 @@ if st.session_state.start_chat:
     if uploaded_files:
         for uploaded_file in uploaded_files:
             # Upload the file to OpenAI
-            file = client.files.create(file=uploaded_file)
+            file = client.files.create(file=uploaded_file, purpose="assistants")
             # Add the file ID to the session state
             st.session_state.file_id_list.append(file.id)
             # Display a success message
