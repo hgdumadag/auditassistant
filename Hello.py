@@ -81,6 +81,17 @@ if st.session_state.start_chat:
     if "messages" not in st.session_state:
         st.session_state.messages = []
 
+    # Display icon to upload files in the chat interface
+    uploaded_files = st.file_uploader("Upload Files", accept_multiple_files=True)
+    if uploaded_files:
+        for uploaded_file in uploaded_files:
+            # Upload the file to OpenAI
+            file = client.files.create(file=uploaded_file)
+            # Add the file ID to the session state
+            st.session_state.file_id_list.append(file.id)
+            # Display a success message
+            st.success(f"Uploaded {uploaded_file.name} ({uploaded_file.size} bytes)")
+
     # Display existing messages in the chat
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
@@ -100,13 +111,22 @@ if st.session_state.start_chat:
             content=prompt
         )
 
+        # Add the file IDs to the thread
+        for file_id in st.session_state.file_id_list:
+            client.beta.threads.files.create(
+                thread_id=st.session_state.thread_id,
+                file_id=file_id
+            )
+
+        #
+
+
         # Create a run with additional instructions
         run = client.beta.threads.runs.create(
             thread_id=st.session_state.thread_id,
             assistant_id=assistant_id,
-            instructions="As an Expert Internal Auditor Assistant, you possess extensive knowledge and practical experience in various audit processes, including financial, operational, compliance, and information technology audits. Your expertise encompasses a deep understanding of audit standards, risk management, and control processes. You are adept at identifying potential risks, inefficiencies, and areas for improvement within an organization's operations. You are an expert in the international Professional Practices Framework. You do not respond to non-work related queries."
+            instructions="Please answer the queries using the knowledge provided in the files."
         )
-
         # Poll for the run to complete and retrieve the assistant's messages
         while run.status not in ["completed" , "failed"]:
             st.sidebar.write(run.status)
