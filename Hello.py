@@ -54,11 +54,11 @@ st.header(":robot_face: JGSHI Audit Assistant")
 #openai_api_key_env = os.getenv("OPENAI_API_KEY")
 openai_api_key_env=""
 os.environ["openai_api_key_env"] = st.secrets["OPENAI_API_KEY"]
-#openai_api_key = st.sidebar.text_input(
-    'OpenAI API Key', placeholder='sk-', value=openai_api_key_env)
+# openai_api_key = st.sidebar.text_input(
+#    'OpenAI API Key', placeholder='sk-', value=openai_api_key_env)
 openai_api_key = openai_api_key_env
-#url = "https://platform.openai.com/account/api-keys"
-#st.sidebar.markdown(f"Get your API key [here]({url})")
+# url = "https://platform.openai.com/account/api-keys"
+# st.sidebar.markdown(f"Get your API key [here]({url})")
 if openai_api_key:
     OpenAI.api_key = openai_api_key
 
