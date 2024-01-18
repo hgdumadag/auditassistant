@@ -71,6 +71,17 @@ if st.sidebar.button("Start Chat"):
     thread = client.beta.threads.create()
     st.session_state.thread_id = thread.id
     st.write("thread id: ", thread.id)
+
+    # Custom CSS to align text in Streamlit buttons to the left
+    left_align_button_css = """
+    <style>
+    button {
+        text-align: left;
+    }
+    </style>
+    """
+    # Inject the CSS with markdown
+    st.markdown(left_align_button_css, unsafe_allow_html=True)
     
     # Create a 2x2 grid using columns showing the recommended prompts
     col1, col2 = st.columns(2)
