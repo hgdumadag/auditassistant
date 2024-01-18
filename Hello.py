@@ -80,23 +80,7 @@ if st.sidebar.button("Start Chat"):
     }
     </style>
     """
-    # Inject the CSS with markdown
-    st.markdown(left_align_button_css, unsafe_allow_html=True)
     
-    # Create a 2x2 grid using columns showing the recommended prompts
-    col1, col2 = st.columns(2)
-    with col1:
-        if st.button(statements[0]):
-            st.session_state.user_prompt = statements[0]
-        if st.button(statements[2]):
-            st.session_state.user_prompt = statements[2]
-
-    with col2:
-        if st.button(statements[1]):
-            st.session_state.user_prompt = statements[1]
-        if st.button(statements[3]):
-            st.session_state.user_prompt = statements[3]
-
 # Define the function to process messages with citations
 def process_message_with_citations(message):
     message_content = message.content[0].text.value
@@ -117,9 +101,31 @@ if st.session_state.start_chat:
     # Chat input for the user
     user_typed_prompt = st.chat_input("How can I help you?")
 
+# Inject the CSS with markdown
+    st.markdown(left_align_button_css, unsafe_allow_html=True)
+    
+    # Create a 2x2 grid using columns showing the recommended prompts
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button(statements[0]):
+            st.session_state.user_prompt = statements[0]
+        if st.button(statements[2]):
+            st.session_state.user_prompt = statements[2]
+
+    with col2:
+        if st.button(statements[1]):
+            st.session_state.user_prompt = statements[1]
+        if st.button(statements[3]):
+            st.session_state.user_prompt = statements[3]
+
+    
     # Determine the source of the prompt
     prompt = user_typed_prompt or st.session_state.get('user_prompt')
 
+    # displays the prompts
+    st.write("user_prompt: ",st.session_state.user_prompt)
+    st.write("user_typed_prompt: ", user_typed_prompt)
+    
     # Handle the prompt
     if prompt:
         # Add user message to the state and display it
