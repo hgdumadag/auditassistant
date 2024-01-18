@@ -61,6 +61,8 @@ openai_api_key = openai_api_key_env
 # st.sidebar.markdown(f"Get your API key [here]({url})")
 if openai_api_key:
     OpenAI.api_key = openai_api_key
+# Recommended Prompts
+statements = ["How can you help me?", "Can you suggest a methodology for assessing fraud risk in Cybersecurity?", "Can you suggest a structure for an audit report on Contract Management?", "Are there any recent developments or emerging trends in the field of auditing that I should be aware of?"]
 
 # Button to start the chat session
 if st.sidebar.button("Start Chat"):
@@ -69,6 +71,20 @@ if st.sidebar.button("Start Chat"):
     thread = client.beta.threads.create()
     st.session_state.thread_id = thread.id
     st.write("thread id: ", thread.id)
+    
+    # Create a 2x2 grid using columns showing the recommended prompts
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button(statements[0]):
+            st.session_state.user_prompt = statements[0]
+        if st.button(statements[2]):
+            st.session_state.user_prompt = statements[2]
+
+    with col2:
+        if st.button(statements[1]):
+            st.session_state.user_prompt = statements[1]
+        if st.button(statements[3]):
+            st.session_state.user_prompt = statements[3]
 
 # Define the function to process messages with citations
 def process_message_with_citations(message):
