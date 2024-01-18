@@ -23,7 +23,7 @@ import os
 #from dotenv import load_dotenv
 #load_dotenv()
 
-LOGGER = get_logger(__name__)
+
 
 # Custom CSS to align text in Streamlit buttons to the left
 left_align_button_css = """
@@ -33,6 +33,8 @@ button {
 }
 </style>
 """
+
+LOGGER = get_logger(__name__)
 
 # Set your OpenAI Assistant ID here
 assistant_id = ""
