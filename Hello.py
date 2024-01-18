@@ -25,7 +25,14 @@ import os
 
 LOGGER = get_logger(__name__)
 
-
+# Custom CSS to align text in Streamlit buttons to the left
+left_align_button_css = """
+<style>
+button {
+    text-align: left;
+}
+</style>
+"""
 
 # Set your OpenAI Assistant ID here
 assistant_id = ""
@@ -72,14 +79,7 @@ if st.sidebar.button("Start Chat"):
     st.session_state.thread_id = thread.id
     st.write("thread id: ", thread.id)
 
-    # Custom CSS to align text in Streamlit buttons to the left
-    left_align_button_css = """
-    <style>
-    button {
-        text-align: left;
-    }
-    </style>
-    """
+    
     
 # Define the function to process messages with citations
 def process_message_with_citations(message):
