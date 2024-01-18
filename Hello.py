@@ -64,8 +64,11 @@ st.header(":robot_face: JGSHI Audit Assistant")
 # Path to your logo (can be a local path or a URL)
 logo_path = "JGSHI.jpg"  # Replace with your logo path or URL
 
-# Display the logo in the sidebar
-st.sidebar.image(logo_path, use_column_width=True)
+# Define the desired width of the logo (in pixels)
+logo_width = 100  # Adjust this value as needed
+
+# Display the logo in the sidebar with the specified width
+st.sidebar.image(logo_path, width=logo_width)
 
 # Get the OPENAI API Key
 #openai_api_key_env = os.getenv("OPENAI_API_KEY")
