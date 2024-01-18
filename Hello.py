@@ -69,7 +69,7 @@ logo_width = 95  # Adjust this value as needed
 
 # Display the logo in the sidebar with the specified width
 st.sidebar.image(logo_path, width=logo_width)
-st.sidebar.markdown('<br>', unsafe_allow_html=True)
+st.sidebar.markdown('<br><br>', unsafe_allow_html=True)
 
 # Get the OPENAI API Key
 #openai_api_key_env = os.getenv("OPENAI_API_KEY")
