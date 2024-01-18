@@ -129,8 +129,8 @@ if st.session_state.start_chat:
     prompt = user_typed_prompt or st.session_state.get('user_prompt')
 
     # displays the prompts
-    st.write("user_prompt: ", st.session_state.user_prompt)
-    st.write("user_typed_prompt: ", user_typed_prompt)
+    # st.write("user_prompt: ", st.session_state.user_prompt)
+    st.write("user_typed_prompt: ", prompt)
     
     # Handle the prompt
     if prompt:
