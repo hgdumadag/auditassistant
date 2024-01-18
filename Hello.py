@@ -65,7 +65,7 @@ st.header(":robot_face: JGSHI Audit Assistant")
 logo_path = "JGSHI.jpg"  # Replace with your logo path or URL
 
 # Define the desired width of the logo (in pixels)
-logo_width = 75  # Adjust this value as needed
+logo_width = 90  # Adjust this value as needed
 
 # Display the logo in the sidebar with the specified width
 st.sidebar.image(logo_path, width=logo_width)
