@@ -91,7 +91,7 @@ if st.sidebar.button("Start Chat"):
     # Create a thread once and store its ID in the session state
     thread = client.beta.threads.create()
     st.session_state.thread_id = thread.id
-    st.write("thread id: ", thread.id)
+    #st.write("thread id: ", thread.id)
 
     
     
