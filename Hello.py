@@ -23,9 +23,18 @@ import os
 #from dotenv import load_dotenv
 #load_dotenv()
 
+
+
+# Custom CSS to align text in Streamlit buttons to the left
+left_align_button_css = """
+<style>
+button {
+    text-align: left;
+}
+</style>
+"""
+
 LOGGER = get_logger(__name__)
-
-
 
 # Set your OpenAI Assistant ID here
 assistant_id = ""
@@ -61,6 +70,8 @@ openai_api_key = openai_api_key_env
 # st.sidebar.markdown(f"Get your API key [here]({url})")
 if openai_api_key:
     OpenAI.api_key = openai_api_key
+# Recommended Prompts
+statements = ["How can you help me?", "Can you suggest a methodology for assessing fraud risk in Cybersecurity?", "Can you suggest a structure for an audit report on Contract Management?", "Are there any recent developments or emerging trends in the field of auditing that I should be aware of?"]
 
 # Button to start the chat session
 if st.sidebar.button("Start Chat"):
@@ -70,6 +81,8 @@ if st.sidebar.button("Start Chat"):
     st.session_state.thread_id = thread.id
     st.write("thread id: ", thread.id)
 
+    
+    
 # Define the function to process messages with citations
 def process_message_with_citations(message):
     message_content = message.content[0].text.value
@@ -85,20 +98,71 @@ if st.session_state.start_chat:
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
-
+    # ------------New Code -----------#
+    
     # Chat input for the user
-    if prompt := st.chat_input("How can I help you?"):
-        #Add user message to the state and display it
+    user_typed_prompt = st.chat_input("How can I help you?")
+
+# Inject the CSS with markdown
+    st.markdown(left_align_button_css, unsafe_allow_html=True)
+
+  #  if 'user_prompt' in st.session_state:
+  #      st.write("user_prompt: ", st.session_state.user_prompt)
+  #  else:
+  #      st.write("user_prompt is not set yet.")
+
+    
+    # Create a 2x2 grid using columns showing the recommended prompts
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button(statements[0]):
+            st.session_state.user_prompt = statements[0]
+        if st.button(statements[2]):
+            st.session_state.user_prompt = statements[2]
+
+    with col2:
+        if st.button(statements[1]):
+            st.session_state.user_prompt = statements[1]
+        if st.button(statements[3]):
+            st.session_state.user_prompt = statements[3]
+
+    
+    # Determine the source of the prompt
+    prompt = user_typed_prompt or st.session_state.get('user_prompt')
+
+    # displays the prompts
+    # st.write("user_prompt: ", st.session_state.user_prompt)
+    # st.write("user_typed_prompt: ", prompt)
+    
+    # Handle the prompt
+    if prompt:
+        # Add user message to the state and display it
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
-    
+
         # Add the user's message to the existing thread
         client.beta.threads.messages.create(
             thread_id=st.session_state.thread_id,
             role="user",
             content=prompt
         )
+
+
+    # ----------------------------#
+    # Chat input for the user
+   # if prompt := st.chat_input("How can I help you?"):
+   #     #Add user message to the state and display it
+   #     st.session_state.messages.append({"role": "user", "content": prompt})
+   #     with st.chat_message("user"):
+   #         st.markdown(prompt)
+    
+   #     # Add the user's message to the existing thread
+   #     client.beta.threads.messages.create(
+   #         thread_id=st.session_state.thread_id,
+   #         role="user",
+   #         content=prompt
+   #     )
 
         # Create a run with additional instructions
         run = client.beta.threads.runs.create(
@@ -112,7 +176,7 @@ if st.session_state.start_chat:
             st.sidebar.write(run.status)
             # if run.status == "requires action":
             #    handle_function(run)
-            time.sleep(2)	
+            time.sleep(5)	
             run = client.beta.threads.runs.retrieve(
                 thread_id=st.session_state.thread_id,
                 run_id=run.id
