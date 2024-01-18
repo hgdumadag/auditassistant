@@ -106,10 +106,10 @@ if st.session_state.start_chat:
 # Inject the CSS with markdown
     st.markdown(left_align_button_css, unsafe_allow_html=True)
 
-    if 'user_prompt' in st.session_state:
-        st.write("user_prompt: ", st.session_state.user_prompt)
-    else:
-        st.write("user_prompt is not set yet.")
+  #  if 'user_prompt' in st.session_state:
+  #      st.write("user_prompt: ", st.session_state.user_prompt)
+  #  else:
+  #      st.write("user_prompt is not set yet.")
 
     
     # Create a 2x2 grid using columns showing the recommended prompts
@@ -132,7 +132,7 @@ if st.session_state.start_chat:
 
     # displays the prompts
     # st.write("user_prompt: ", st.session_state.user_prompt)
-    st.write("user_typed_prompt: ", prompt)
+    # st.write("user_typed_prompt: ", prompt)
     
     # Handle the prompt
     if prompt:
