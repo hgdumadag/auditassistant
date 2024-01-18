@@ -36,6 +36,12 @@ button {
 
 LOGGER = get_logger(__name__)
 
+# Path to your logo (can be a local path or a URL)
+logo_path = "JGSHI.jpg"  # Replace with your logo path or URL
+
+# Display the logo in the sidebar
+st.sidebar.image(logo_path, use_column_width=True)
+
 # Set your OpenAI Assistant ID here
 assistant_id = ""
 os.environ["assistant_id"] = st.secrets["ASSISTANT_ID"]
