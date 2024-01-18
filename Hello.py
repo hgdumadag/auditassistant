@@ -71,7 +71,7 @@ openai_api_key = openai_api_key_env
 if openai_api_key:
     OpenAI.api_key = openai_api_key
 # Recommended Prompts
-statements = ["How can you help me?", "Can you suggest a methodology for assessing fraud risk in Cybersecurity?", "Can you suggest a structure for an audit report on Contract Management?", "Are there any recent developments or emerging trends in the field of auditing that I should be aware of?"]
+statements = ["What are the unique audit considerations for an airline company?", "Can you suggest a methodology for assessing fraud risk in Cybersecurity?", "Can you suggest a structure for an audit report on Contract Management?", "Are there any recent developments or emerging trends in the field of auditing that I should be aware of?"]
 
 # Button to start the chat session
 if st.sidebar.button("Start Chat"):
