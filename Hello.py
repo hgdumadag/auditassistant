@@ -112,20 +112,43 @@ if st.session_state.start_chat:
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
-
+    # ------------New Code -----------#
+    
     # Chat input for the user
-    if prompt := st.chat_input("How can I help you?"):
-        #Add user message to the state and display it
+    user_typed_prompt = st.chat_input("How can I help you?")
+
+    # Determine the source of the prompt
+    prompt = user_typed_prompt or st.session_state.get('user_prompt')
+
+    # Handle the prompt
+    if prompt:
+        # Add user message to the state and display it
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
-    
+
         # Add the user's message to the existing thread
         client.beta.threads.messages.create(
             thread_id=st.session_state.thread_id,
             role="user",
             content=prompt
         )
+
+
+    # ----------------------------#
+    # Chat input for the user
+   # if prompt := st.chat_input("How can I help you?"):
+   #     #Add user message to the state and display it
+   #     st.session_state.messages.append({"role": "user", "content": prompt})
+   #     with st.chat_message("user"):
+   #         st.markdown(prompt)
+    
+   #     # Add the user's message to the existing thread
+   #     client.beta.threads.messages.create(
+   #         thread_id=st.session_state.thread_id,
+   #         role="user",
+   #         content=prompt
+   #     )
 
         # Create a run with additional instructions
         run = client.beta.threads.runs.create(
